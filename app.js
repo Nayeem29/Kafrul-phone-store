@@ -14,8 +14,22 @@ const onLoad = (brandName) => {
 }
 
 const displayPhone = (spec) => {
-    // console.log(spec);
+    const div = document.querySelector('#phone-cart');
     spec.forEach(brand => {
-        console.log(brand.phone_name);
+        console.log(brand);
+        const phoneCard = document.createElement('div');
+        phoneCard.innerHTML = `
+        
+                    <div class="card text-center mb-3">
+                        <div class="card-body">
+                            <img src="${brand.image}" class="card-img-top w-50" alt="...">
+                            <h5 class="card-title">Name: ${brand.phone_name}</h5>
+                            <p class="card-text">Release Date:${brand.releaseDate}</p>
+                            <a href="#" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+             
+        `;
+        div.appendChild(phoneCard);
     })
 }
