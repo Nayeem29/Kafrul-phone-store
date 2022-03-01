@@ -105,13 +105,14 @@ const phoneId = id => {
 // display phone details 
 const displayDetails = details => {
 
-    const sensors = details.mainFeatures.sensors;
-    console.log(sensors);
-    // cartDiv.textContent = '';
-    phoneValue = details.brand;
-    console.log(phoneValue);
-    const specificationDiv = document.createElement('div');
-    specificationDiv.innerHTML = `
+        const sensors = details.mainFeatures.sensors;
+        console.log(sensors);
+        const others = details.others;
+        // cartDiv.textContent = '';
+        phoneValue = details.brand;
+        console.log(phoneValue);
+        const specificationDiv = document.createElement('div');
+        specificationDiv.innerHTML = `
     <div class="card text-center mb-3">
       <div class="card-body">
         <h2 class="card-title my-3 text-primary">${details.name}</h2>
@@ -125,6 +126,13 @@ const displayDetails = details => {
             }
             return sensor;
         })(sensors)}</p>
+        <h4 class="card-text my-3 text-primary">Others: </h4><p>${others!=null ? (function loopOthers(other){
+            let property='';
+            for(let value in other){
+                property+=`${value} : ${other[value]}`;
+            }
+            return property;
+        })(others): 'Not Found'}</p>
       </div>
     </div>
     `;
