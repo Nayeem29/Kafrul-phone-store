@@ -2,9 +2,13 @@ const input = document.querySelector('#brand-name');
 const search = document.querySelector('.search-btn');
 let cartDiv = document.querySelector('#phone-cart');
 let detailsDiv = document.querySelector('#phone-details');
+let showLess = true;
+
+let showMoreBtn = document.querySelector('#show');
+showMoreBtn.style.display = 'none';
 
 const initial = () => {
-    detailsDiv = '';
+    detailsDiv.textContent = '';
     const url = 'https://openapi.programming-hero.com/api/phones?';
     fetch(url)
         .then(res => res.json())
@@ -13,7 +17,12 @@ const initial = () => {
 
 search.addEventListener('click', () => {
     const inputValue = input.value;
-    onLoad(inputValue);
+    if ((inputValue === '')) {
+        alert("Please provide your prefered gadget Brand");
+    } else {
+        onLoad(inputValue);
+    }
+
 })
 
 const onLoad = (brandName) => {
@@ -26,13 +35,15 @@ const onLoad = (brandName) => {
 
 const displayPhone = (spec) => {
     console.log(spec.data);
-    const div = document.querySelector('#phone-cart');
+
     let count = 0;
     const phoneSummary = spec.data;
-    phoneSummary.forEach(brand => {
-        // console.log(brand);
-        const phoneCard = document.createElement('div');
-        phoneCard.innerHTML = `     
+    if (phoneSummary.length === 0) {
+        alert('Not Available in our store');
+    } else {
+        phoneSummary.forEach(brand => {
+            const phoneCard = document.createElement('div');
+            phoneCard.innerHTML = `     
                     <div class="card text-center mb-3">
                         <div class="card-body">
                             <img src="${brand.image}" class="card-img-top w-50" alt="...">
@@ -44,13 +55,26 @@ const displayPhone = (spec) => {
              
         `;
 
-        cartDiv.appendChild(phoneCard);
-        count++;
-        // if (count > 20) {
+            cartDiv.appendChild(phoneCard);
+            count++;
+            if (count > 20 && showLess === true) {
+                showMoreBtn.style.display = 'block';
+                showMoreBtn.addEventListener('click', () => {
+                    loadMore();
+                })
 
-        // }
-    })
+            }
+        })
+    }
+
 }
+
+const loadMore = (moreData) => {
+    showMoreBtn.style.display = 'none';
+    showLess = false;
+    displayPhone(moreData);
+}
+
 
 const phoneId = id => {
     // console.log(id);
