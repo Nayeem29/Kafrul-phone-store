@@ -2,21 +2,13 @@ const input = document.querySelector('#brand-name');
 const search = document.querySelector('.search-btn');
 let cartDiv = document.querySelector('#phone-cart');
 let detailsDiv = document.querySelector('#phone-details');
+let phoneValue = '';
 let showLess = true;
 const spinner = document.querySelector('#spin');
 
 let showMoreBtn = document.querySelector('#show');
 showMoreBtn.style.display = 'none';
 spinner.style.display = 'none';
-
-// // on load and back button function 
-// const initial = () => {
-//     detailsDiv.textContent = '';
-//     const url = 'https://openapi.programming-hero.com/api/phones?';
-//     fetch(url)
-//         .then(res => res.json())
-//         .then(data => displayPhone(data))
-// }
 
 // toggole function 
 const toggleSpin = displaySpinner => {
@@ -34,6 +26,19 @@ search.addEventListener('click', () => {
     }
 
 })
+
+// click on show more button 
+showMoreBtn.addEventListener('click', () => {
+    phoneValue != '' ? morePhones(phoneValue) : alert('No Brand Name is found');
+})
+
+//call api for showing more than 20 Phones
+const morePhones = (phoneName) => {
+    showMoreBtn.style.display = 'none';
+    showLess = false;
+    onLoad(phoneName);
+
+}
 
 // getting data from api for phone brand 
 const onLoad = (brandName) => {
@@ -53,6 +58,7 @@ const displayPhone = (spec) => {
     if (phoneSummary.length === 0) {
         alert('Not Available in our store');
     } else {
+        phoneValue = phoneSummary[0].brand;
         if ((phoneSummary.length > 20) && showLess) {
             console.log(phoneSummary.length);
             phoneSummary = phoneSummary.slice(0, 20);
@@ -80,22 +86,16 @@ const displayPhone = (spec) => {
     }
     toggleSpin('none');
     detailsDiv.textContent = '';
-
-    showMoreBtn.addEventListener('click', () => {
-        showMoreBtn.style.display = 'none';
-        showLess = false;
-        console.log(phoneSummary[0].brand);
-        onLoad(phoneSummary[0].brand);
-    })
+    showLess = true;
 
 }
-
 
 // search by phone id 
 const phoneId = id => {
     // console.log(id);
     detailsDiv.textContent = '';
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+    toggleSpin('block');
     fetch(url)
         .then(res => res.json())
         .then(data => displayDetails(data.data))
@@ -104,17 +104,17 @@ const phoneId = id => {
 
 // display phone details 
 const displayDetails = details => {
-    // console.log(details.mainFeatures.storage);
-    // console.log(details.mainFeatures.memory);
-    // console.log(details.releaseDate);
+
     const sensors = details.mainFeatures.sensors;
     console.log(sensors);
-    cartDiv.textContent = '';
+    // cartDiv.textContent = '';
+    phoneValue = details.brand;
+    console.log(phoneValue);
     const specificationDiv = document.createElement('div');
     specificationDiv.innerHTML = `
     <div class="card text-center mb-3">
       <div class="card-body">
-        <h2 class="card-title my-3">Phone: </h2><p>${details.name}</p>
+        <h2 class="card-title my-3">Phone: </h2><h5>${details.name}</h5>
         <img src="${details.image}" class="card-img-top w-25" alt="...">
         <h4 class="card-text my-3">Release Date: </h4><p>${details.releaseDate ? details.releaseDate:'Not available'}</p>
         <h4 class="card-text my-3">Memory: </h4><p>${details.mainFeatures.memory}</p>
@@ -126,10 +126,11 @@ const displayDetails = details => {
             return sensor;
         })(sensors)}</p>
       </div>
-      <button onclick="initial()" type="button" class="btn btn-primary mx-auto w-25" >Back</button>
     </div>
     `;
     detailsDiv.appendChild(specificationDiv);
-    showMoreBtn.style.display = 'none';
+    // detailsDiv.append(specificationDiv, cartDiv, showMoreBtn);
+    toggleSpin('none');
+    // showMoreBtn.style.display = 'block';
 
 }
