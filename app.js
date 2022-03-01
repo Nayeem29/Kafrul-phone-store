@@ -19,7 +19,7 @@ const toggleSpin = displaySpinner => {
 //search btn function 
 search.addEventListener('click', () => {
     const inputValue = input.value;
-    toggleSpin('block');
+
     if ((inputValue === '')) {
         alert("Please provide your prefered gadget Brand");
     } else {
@@ -46,6 +46,7 @@ const morePhones = (phoneName) => {
 const onLoad = (brandName) => {
     input.value = '';
     const url = `https://openapi.programming-hero.com/api/phones?search=${brandName}`;
+    toggleSpin('block');
     fetch(url)
         .then(res => res.json())
         .then(data => displayPhone(data))
