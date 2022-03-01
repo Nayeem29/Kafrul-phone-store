@@ -96,7 +96,6 @@ const displayPhone = (spec) => {
 
 // search by phone id 
 const phoneId = id => {
-    // console.log(id);
     detailsDiv.textContent = '';
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     toggleSpin('block');
@@ -112,7 +111,6 @@ const displayDetails = details => {
         const sensors = details.mainFeatures.sensors;
         console.log(sensors);
         const others = details.others;
-        // cartDiv.textContent = '';
         phoneValue = details.brand;
         console.log(phoneValue);
         const specificationDiv = document.createElement('div');
@@ -141,8 +139,6 @@ const displayDetails = details => {
     </div>
     `;
     detailsDiv.appendChild(specificationDiv);
-    // detailsDiv.append(specificationDiv, cartDiv, showMoreBtn);
     toggleSpin('none');
-    // showMoreBtn.style.display = 'block';
 
 }
