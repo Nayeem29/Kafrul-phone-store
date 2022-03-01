@@ -97,6 +97,7 @@ const displayPhone = (spec) => {
 // search by phone id 
 const phoneId = id => {
     detailsDiv.textContent = '';
+    window.scrollTo(0, 2000);
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     toggleSpin('block');
     fetch(url)
