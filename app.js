@@ -9,14 +9,14 @@ let showMoreBtn = document.querySelector('#show');
 showMoreBtn.style.display = 'none';
 spinner.style.display = 'none';
 
-// on load and back button function 
-const initial = () => {
-    detailsDiv.textContent = '';
-    const url = 'https://openapi.programming-hero.com/api/phones?';
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayPhone(data))
-}
+// // on load and back button function 
+// const initial = () => {
+//     detailsDiv.textContent = '';
+//     const url = 'https://openapi.programming-hero.com/api/phones?';
+//     fetch(url)
+//         .then(res => res.json())
+//         .then(data => displayPhone(data))
+// }
 
 // toggole function 
 const toggleSpin = displaySpinner => {
@@ -56,7 +56,7 @@ const displayPhone = (spec) => {
         if ((phoneSummary.length > 20) && showLess) {
             console.log(phoneSummary.length);
             phoneSummary = phoneSummary.slice(0, 20);
-
+            showMoreBtn.style.display = 'block';
         }
 
         console.log(phoneSummary);
@@ -66,7 +66,7 @@ const displayPhone = (spec) => {
                     <div class="card text-center mb-3">
                         <div class="card-body">
                             <img src="${brand.image}" class="card-img-top w-50" alt="...">
-                            <h5 class="card-title">Name: ${brand.phone_name}</h5>
+                            <h5 class="card-title">${brand.phone_name}</h5>
                             
                             <button onclick="phoneId('${brand.slug}')" type="button" class="btn btn-primary" >Details</button>
                         </div>
@@ -80,17 +80,14 @@ const displayPhone = (spec) => {
     }
     toggleSpin('none');
     detailsDiv.textContent = '';
-    showMoreBtn.style.display = 'block';
+
     showMoreBtn.addEventListener('click', () => {
-        loadMore(spec.data);
+        showMoreBtn.style.display = 'none';
+        showLess = false;
+        console.log(phoneSummary[0].brand);
+        onLoad(phoneSummary[0].brand);
     })
 
-}
-
-const loadMore = (moreData) => {
-    showMoreBtn.style.display = 'none';
-    showLess = false;
-    displayPhone(moreData);
 }
 
 
