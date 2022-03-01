@@ -97,7 +97,7 @@ const displayPhone = (spec) => {
 // search by phone id 
 const phoneId = id => {
     detailsDiv.textContent = '';
-    window.scrollTo(0, 2000);
+    window.scrollTo(0, 5000);
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     toggleSpin('block');
     fetch(url)
@@ -116,7 +116,7 @@ const displayDetails = details => {
         console.log(phoneValue);
         const specificationDiv = document.createElement('div');
         specificationDiv.innerHTML = `
-        
+
     <div class="card text-center mb-3">
         <div class="card-body" >
           <h2 class="card-title my-3 text-primary">${details.name}</h2>
