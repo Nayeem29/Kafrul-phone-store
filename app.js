@@ -10,6 +10,7 @@ let showMoreBtn = document.querySelector('#show');
 showMoreBtn.style.display = 'none';
 spinner.style.display = 'none';
 
+
 // toggole function 
 const toggleSpin = displaySpinner => {
     spinner.style.display = displaySpinner;
@@ -40,6 +41,7 @@ const morePhones = (phoneName) => {
 
 }
 
+
 // getting data from api for phone brand 
 const onLoad = (brandName) => {
     input.value = '';
@@ -56,6 +58,7 @@ const displayPhone = (spec) => {
     cartDiv.textContent = '';
     let phoneSummary = spec.data;
     if (phoneSummary.length === 0) {
+        showMoreBtn.style.display = 'none';
         alert('Not Available in our store');
     } else {
         phoneValue = phoneSummary[0].brand;
