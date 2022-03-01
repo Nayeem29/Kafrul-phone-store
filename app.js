@@ -77,8 +77,8 @@ const displayPhone = (spec) => {
                         <div class="card-body">
                             <img src="${brand.image}" class="card-img-top w-50" alt="...">
                             <h5 class="card-title">${brand.phone_name}</h5>
-                            
-                            <button onclick="phoneId('${brand.slug}')" type="button" class="btn btn-primary" >Details</button>
+                      
+                            <button onclick="phoneId('${brand.slug}')" type="button" class="btn btn-primary">Details</button>
                         </div>
                     </div>
              
@@ -115,8 +115,9 @@ const displayDetails = details => {
         console.log(phoneValue);
         const specificationDiv = document.createElement('div');
         specificationDiv.innerHTML = `
+        
     <div class="card text-center mb-3">
-      <div class="card-body">
+      <div class="card-body" >
         <h2 class="card-title my-3 text-primary">${details.name}</h2>
         <img src="${details.image}" class="card-img-top w-25" alt="...">
         <h4 class="card-text my-3 text-primary">Release Date: </h4><p>${details.releaseDate ? details.releaseDate:'Not available'}</p>
@@ -134,7 +135,7 @@ const displayDetails = details => {
                 property+=`${value} : ${other[value]}`;
             }
             return property;
-        })(others): 'Not Found'}</p>
+        })(others): 'Not Available'}</p>
       </div>
     </div>
     `;
