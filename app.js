@@ -114,11 +114,11 @@ const displayDetails = details => {
     specificationDiv.innerHTML = `
     <div class="card text-center mb-3">
       <div class="card-body">
-        <h2 class="card-title my-3">Phone: </h2><h5>${details.name}</h5>
+        <h2 class="card-title my-3 text-primary">${details.name}</h2>
         <img src="${details.image}" class="card-img-top w-25" alt="...">
-        <h4 class="card-text my-3">Release Date: </h4><p>${details.releaseDate ? details.releaseDate:'Not available'}</p>
-        <h4 class="card-text my-3">Memory: </h4><p>${details.mainFeatures.memory}</p>
-        <h4 class="card-text my-3">Sensor: </h4><p>${(function loopSensor(sensors){
+        <h4 class="card-text my-3 text-primary">Release Date: </h4><p>${details.releaseDate ? details.releaseDate:'Not available'}</p>
+        <h4 class="card-text my-3 text-primary">Memory: </h4><p>${details.mainFeatures.memory}</p>
+        <h4 class="card-text my-3 text-primary">Sensor: </h4><p>${(function loopSensor(sensors){
             let sensor= '';
             for(let i=0;i<sensors.length;i++){   
                  sensor =sensor+ sensors[i]+' , ';
